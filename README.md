@@ -3,6 +3,9 @@
 1. Docker
 2. Visual Studio Code
 3. Git
+```bash
+git commit --no-verify
+```
 
 上記は必ずインストールした上で始めてください。
 
