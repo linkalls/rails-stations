@@ -1,0 +1,13 @@
+<%= form_with(model: @movie) do |f| %>
+<%= f.label :name,"映画タイトル" %>
+  <%= f.text_field :name %>
+<%= f.label :year, "公開年" %>
+  <%= f.text_field :year %>
+  <%= f.label :is_showing, "上映中か" %>
+  <%= f.select :is_showing,[["上映中",true],["公開予定",false]] %>
+  <%= f.label :description,"概要" %>
+  <%= f.text_field :description %>
+  <%= f.label :image_url,"画像url" %>
+  <%= f.text_field :image_url %>
+  <%= f.submit "save changes" %>
+<% end %>
