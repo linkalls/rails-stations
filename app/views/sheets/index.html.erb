@@ -43,8 +43,9 @@
     <tr>
       <td class="row-label"><%= row.upcase %></td>
       <% @columns.each do |column| %>
-        <% sheet = @sheets.find { |s| s.row == row && s.column == column } %>
-        <td><%= "#{row.upcase}-#{column}" if sheet %></td>
+        <% if sheet = @sheets.find { |s| s.row == row && s.column == column } %>
+          <td><%= "#{row.upcase}-#{column}" if sheet %></td>
+        <% end %>
       <% end %>
       <td class="row-label"><%= row.upcase %></td>
     </tr>
