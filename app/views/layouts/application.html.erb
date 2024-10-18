@@ -7,9 +7,11 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css">
   </head>
 
   <body>
+  <%= render "shared/flash" %>
     <%= yield %>
   </body>
 </html>

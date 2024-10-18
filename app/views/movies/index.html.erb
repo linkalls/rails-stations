@@ -1,4 +1,32 @@
-<% @movies.each do |movie| %>
-  <%= movie.name %>
-  <%= image_tag(movie.image_url.presence || "https://picsum.photos/200", alt: movie.name) %>
+<%= form_with(url: movies_path, method: :get, data: { turbo_frame: "movies_list" }) do |f| %>
+  <!--  scope: :movies-->
+  <%= f.radio_button :is_showing, "", checked: true %>
+  <%= f.label :is_showing, "すべて" %>
+
+  <%= f.radio_button :is_showing, 1 %>
+  <%= f.label :is_showing, "公開中" %>
+
+  <%= f.radio_button :is_showing, 0 %>
+  <%= f.label :is_showing, "公開予定" %>
+
+  <%= f.text_field :keyword, placeholder: "キーワードを入力する" %>
+
+  <%= f.submit "検索" %> <!-- 検索ボタンを追加 -->
+<% end %>
+
+<%= turbo_frame_tag "movies_list" do %>
+  <% if @movies.present? %>
+    <% @movies.each do |movie| %>
+      <div>
+        <h3><%= movie.name %></h3>
+        <% if movie.image_url =~ URI::regexp(%w[http https]) %>
+          <%= image_tag(movie.image_url, alt: movie.name) %>
+        <% else %>
+          <p><%= movie.image_url %></p>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>映画が見つかりませんでした。</p>
+  <% end %>
 <% end %>

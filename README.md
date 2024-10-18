@@ -4,7 +4,7 @@
 2. Visual Studio Code
 3. Git
 ```bash
-git commit --no-verify
+git commit -n
 ```
 
 上記は必ずインストールした上で始めてください。
