@@ -1,0 +1,62 @@
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .movie-info {
+        background: #fff;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 600px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .movie-info p {
+        font-size: 18px;
+        color: #666;
+    }
+
+    .schedules {
+        margin-top: 20px;
+    }
+
+    .schedule {
+        background: #e0e0e0;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+    }
+
+    .schedule span {
+        display: block;
+        font-weight: bold;
+        color: #444;
+    }
+</style>
+
+<div class="movie-info">
+  <h1><%= @movie.name %></h1>
+  <p>公開年: <%= @movie.year %></p>
+  <p>概要: <%= @movie.description %></p>
+  <%= image_tag @movie.image_url, alt: "画像url" %>
+  <div class="schedules">
+    <%= @schedules %>
+    <% @schedules.each do |schedule| %>
+      <div class="schedule">
+        <span>開始時間: <%= schedule.start_time %></span>
+        <span>終了時間: <%= schedule.end_time %></span>
+        <span>created_at: <%= schedule.created_at %></span>
+        <span>updated_at: <%= schedule.updated_at %></span>
+      </div>
+    <% end %>
+  </div>
+</div>

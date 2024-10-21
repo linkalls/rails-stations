@@ -69,6 +69,7 @@
     <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.1.5, Remote: ruby-3.3.3-p89) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.24.1, Remote: ruby-3.3.3-p89) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.7.2, Remote: ruby-3.3.3-p89) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mutex_m (v0.2.0, Remote: ruby-3.3.3-p89) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mysql2 (v0.5.6, Remote: ruby-3.3.3-p89) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-imap (v0.4.14, Remote: ruby-3.3.3-p89) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-pop (v0.1.2, Remote: ruby-3.3.3-p89) [gem]" level="application" />
@@ -105,6 +106,7 @@
     <orderEntry type="library" scope="PROVIDED" name="stimulus-rails (v1.3.3, Remote: ruby-3.3.3-p89) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="strscan (v3.1.0, Remote: ruby-3.3.3-p89) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.3.1, Remote: ruby-3.3.3-p89) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="turbo-rails (v1.5.0, Remote: ruby-3.3.3-p89) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.6, Remote: ruby-3.3.3-p89) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v4.2.1, Remote: ruby-3.3.3-p89) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="webrick (v1.8.1, Remote: ruby-3.3.3-p89) [gem]" level="application" />

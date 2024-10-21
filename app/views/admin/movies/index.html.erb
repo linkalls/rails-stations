@@ -1,9 +1,9 @@
 <% @movies.each do |movie| %>
-<table>
-<tr>
-  <thead>
+  <table>
+    <tr>
+      <thead>
 
-    <th scope="col">ID</th>
+      <th scope="col">ID</th>
       <th scope="col">タイトル</th>
       <th scope="col">公開年</th>
       <th scope="col">概要</th>
@@ -11,23 +11,33 @@
       <th scope="col">上映中</th>
       <th scope="col">登録日時</th>
       <th scope="col">更新日時</th>
-</tr>
-  <thead>
-  <tbody>
+      <th scope="col">スケジュール</th>
+
+    </tr>
+    <thead>
+    <tbody>
     <tr>
       <td><%= movie.id %></td>
       <td><%= movie.name %></td>
       <td><%= movie.year %></td>
       <td><%= movie.description %></td>
-<% if valid_url?(movie.image_url) %>
+      <% if valid_url?(movie.image_url) %>
         <td><%= image_tag movie.image_url %></td>
-        <% else %>
+      <% else %>
         <td><%= movie.image_url %></td>
       <% end %>
-      <td><%= movie.is_showing ? "上映中" : "上映終了" %></td>    
-        <td><%= movie.created_at %></td>
+      <td><%= movie.is_showing ? "上映中" : "上映終了" %></td>
+      <td><%= movie.created_at %></td>
       <td><%= movie.updated_at %></td>
-      </tr>
+      <td>
+        <% movie.schedules.each do |schedule| %>
+          <div class="schedule">
+            <span>開始時間: <%= schedule.start_time.strftime("%Y-%m-%d %H:%M:%S") %></span>
+            <span>終了時間: <%= schedule.end_time.strftime("%Y-%m-%d %H:%M:%S") %></span>
+          </div>
+        <% end %>
+      </td>
+    </tr>
     </tbody>
-</table>
+  </table>
 <% end %>

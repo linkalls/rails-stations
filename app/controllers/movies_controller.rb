@@ -18,6 +18,13 @@ class MoviesController < ApplicationController
       end
     end
   end
+
+  def show
+    @movie = Movie.find(params[:id])
+    # assigns(:schedules)ってテストの書いてあるからこれかく
+    @schedules = @movie.schedules
+  end
+
 end
 
 
