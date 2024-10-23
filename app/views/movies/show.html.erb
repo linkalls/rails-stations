@@ -48,14 +48,25 @@
   <p>公開年: <%= @movie.year %></p>
   <p>概要: <%= @movie.description %></p>
   <%= image_tag @movie.image_url, alt: "画像url" %>
+
   <div class="schedules">
-    <%= @schedules %>
     <% @schedules.each do |schedule| %>
       <div class="schedule">
         <span>開始時間: <%= schedule.start_time %></span>
         <span>終了時間: <%= schedule.end_time %></span>
         <span>created_at: <%= schedule.created_at %></span>
         <span>updated_at: <%= schedule.updated_at %></span>
+
+        <!-- 日付選択フォーム -->
+        <%= form_with url: reservation_movie_path(@movie), method: :get do |f| %>
+          <%= f.label :date, "日付選択" %>
+          <%= f.select :date, (0..6).map { |i| [(Date.today + i), (Date.today + i).to_s] }, include_blank: "選択して下さい" %>
+
+          <!-- 隠しフィールドでスケジュールIDを渡す -->
+          <%= f.hidden_field :schedule_id, value: schedule.id %>
+
+          <%= f.submit "座席を予約する" %>
+        <% end %>
       </div>
     <% end %>
   </div>

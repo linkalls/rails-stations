@@ -1,0 +1,2 @@
+module Movies::ReservationsHelper
+end

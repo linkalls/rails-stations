@@ -25,6 +25,29 @@ class MoviesController < ApplicationController
     @schedules = @movie.schedules
   end
 
+  def reservation
+    @movie = Movie.find(params[:id])
+
+    # schedule_idがない場合は302リダイレクト
+    if params[:schedule_id].blank?
+      redirect_to movies_path, alert: 'スケジュールIDが必要です。'
+      return
+    end
+
+    # dateがない場合も同様にリダイレクト
+    if params[:date].blank?
+      redirect_to movies_path, alert: '日付が必要です。'
+      return
+    end
+
+    @schedule = Schedule.find(params[:schedule_id])
+    @sheets = Sheet.all.order(:row, :column)
+    @rows = @sheets.pluck(:row).uniq
+    @columns = @sheets.pluck(:column).uniq
+  end
+
 end
+
+
 
 

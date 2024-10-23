@@ -27,5 +27,6 @@ RSpec.describe Reservation, type: :model do
       reservation.email = '@ddd'
       expect(reservation).not_to be_valid
     end
+
   end
 end

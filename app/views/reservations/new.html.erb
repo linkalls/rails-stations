@@ -1,0 +1,15 @@
+<%= form_with(model: @reservation, url: reservation_path, method: :post) do |f| %>
+  <%= f.hidden_field :date, value: params[:date] %>
+  <%= f.hidden_field :movie_id, value: params[:movie_id] %>
+  <%= f.hidden_field :schedule_id, value: params[:schedule_id] %>
+  <%= f.hidden_field :sheet_id, value: params[:sheet_id] %>
+  <p>日付: <%= params[:date] %></p>
+  <p>映画ID: <%= params[:movie_id] %></p>
+  <p>スケジュールID: <%= params[:schedule_id] %></p>
+  <p>シート番号: <%= params[:sheet_id] %></p>
+  <%= f.label :email, "email" %>
+  <%= f.text_field :email, required: true, type: "email" %>
+  <%= f.label :name, "名前" %>
+  <%= f.text_field :name, required: true %>
+  <%= f.submit "登録する" %>
+<% end %>

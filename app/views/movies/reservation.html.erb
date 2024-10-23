@@ -1,0 +1,56 @@
+<style>
+    .screen {
+        text-align: center;
+        background-color: lightgray;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    table {
+        margin: 0 auto;
+        border-spacing: 10px;
+    }
+
+    th {
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    td {
+        width: 50px;
+        height: 50px;
+        background-color: #d3d3d3;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .row-label, .column-label {
+        font-weight: bold;
+    }
+</style>
+
+<div class="screen">スクリーン</div>
+<table>
+  <tr>
+    <th></th>
+    <% @columns.each do |column| %>
+      <th class="column-label"><%= column %></th>
+    <% end %>
+    <th></th>
+  </tr>
+  <% @rows.each do |row| %>
+    <tr>
+      <td class="row-label"><%= row.upcase %></td>
+      <% @columns.each do |column| %>
+        <% if sheet = @sheets.find { |s| s.row == row && s.column == column } %>
+          <td>
+            <%= link_to "#{row.upcase}-#{column}", new_movie_schedule_reservation_path(@movie.id, params[:schedule_id], date: params[:date], sheet_id: "#{sheet.id}") %>
+          </td>
+
+        <% end %>
+      <% end %>
+      <td class="row-label"><%= row.upcase %></td>
+    </tr>
+  <% end %>
+</table>

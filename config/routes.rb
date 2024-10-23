@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
   get '/sheets', to: "sheets#index"
-  resources :movies
+  post "/reservation", to: "reservations#create"
+
+  resources :movies do
+    member do
+      # 記法
+      get "reservation", to: "movies#reservation"
+    end
+    resources :schedules do
+      resources :reservations, only: [:new]
+    end
+  end
 
   namespace :admin do
     # admin::moviesだから
