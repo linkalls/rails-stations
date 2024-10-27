@@ -45,12 +45,18 @@
       <% @columns.each do |column| %>
         <% if sheet = @sheets.find { |s| s.row == row && s.column == column } %>
           <td>
-            <%= link_to "#{row.upcase}-#{column}", new_movie_schedule_reservation_path(@movie.id, params[:schedule_id], date: params[:date], sheet_id: "#{sheet.id}") %>
+            <% if @reservation_sheets.include?(sheet.id) %>
+              <%= content_tag :span, "#{row.upcase}-#{column}", style: "background-color: gray" %>
+            <% else %>
+              <%= link_to "#{row.upcase}-#{column}", new_movie_schedule_reservation_path(@movie.id, params[:schedule_id], date: params[:date], sheet_id: sheet.id) %>
+            <% end %>
           </td>
-
+        <% else %>
+          <td></td>
         <% end %>
       <% end %>
       <td class="row-label"><%= row.upcase %></td>
     </tr>
   <% end %>
+
 </table>

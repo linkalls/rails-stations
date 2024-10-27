@@ -44,6 +44,8 @@ class MoviesController < ApplicationController
     @sheets = Sheet.all.order(:row, :column)
     @rows = @sheets.pluck(:row).uniq
     @columns = @sheets.pluck(:column).uniq
+    @reservation_sheets = Reservation.where(schedule_id: params[:schedule_id], date: params[:date]).pluck(:sheet_id)
+    # これで登録されてるもの全部のsheet_idを配列で見れる
   end
 
 end
