@@ -1,0 +1,7 @@
+<%= @reservations.each do |reservation| %>
+  <h2>映画名; <%= reservation.schedule.movie.name %></h2>
+  <p>座席: <%= reservation.sheet_id %></p>
+  <p>日時: <%= reservation.date %></p>
+  <p>予約者名: <%= reservation.name %></p>
+  <p>予約者email: <%= reservation.email %></p>
+<% end %>

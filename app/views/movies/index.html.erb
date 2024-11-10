@@ -1,13 +1,13 @@
-<%= form_with(url: movies_path, method: :get, data: { turbo_frame: "movies_list" }) do |f| %>
+<%= form_with(url: movies_path, method: :get) do |f| %>
   <!--  scope: :movies-->
   <%= f.radio_button :is_showing, "", checked: true %>
   <%= f.label :is_showing, "すべて" %>
 
   <%= f.radio_button :is_showing, 1 %>
-  <%= f.label :is_showing, "公開中" %>
+  <%= f.label :is_showing, "公開予定" %>
 
   <%= f.radio_button :is_showing, 0 %>
-  <%= f.label :is_showing, "公開予定" %>
+  <%= f.label :is_showing, "公開終了" %>
 
   <%= f.text_field :keyword, placeholder: "キーワードを入力する" %>
 
@@ -18,13 +18,14 @@
   <% if @movies.present? %>
     <% @movies.each do |movie| %>
       <div>
-        <h3><%= movie.name %></h3>
+        <h3><%= movie.name %> ID:<%= movie.id %></h3>
         <% if movie.image_url =~ URI::regexp(%w[http https]) %>
           <%= image_tag(movie.image_url, alt: movie.name) %>
         <% else %>
           <p><%= movie.image_url %></p>
         <% end %>
       </div>
+      <p><%= movie.is_showing %></p>
     <% end %>
   <% else %>
     <p>映画が見つかりませんでした。</p>
