@@ -5,6 +5,7 @@ class ReservationsController < ApplicationController
       return redirect_to movies_path
     end
     @reservation = Reservation.new
+    redirect_to reservation_movie_path(params[:movie_id], sheet_id: params[:sheet_id], date: params[:date])
   end
 
   def create

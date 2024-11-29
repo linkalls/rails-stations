@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     member do
       # 記法
       get "reservation", to: "movies#reservation"
+
     end
     resources :schedules do
       resources :reservations, only: [:new]
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
     # admin::moviesだから
     resources :movies do
       resources :schedules, only: [:edit, :destroy, :update]
+
     end
     resources :reservations # namespaceでネストされてるからadmin::reservations_controllerだよ
   end

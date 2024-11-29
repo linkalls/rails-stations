@@ -22,7 +22,7 @@ RSpec.describe Admin::ReservationsController, type: :controller do
     end
   end
 
-  describe 'Station12 GET /admin/reservations/new' do
+  describe "Station12 GET /admin/reservations/new" do
     before { get :new }
 
     it '200が返ること' do
@@ -42,7 +42,7 @@ RSpec.describe Admin::ReservationsController, type: :controller do
       movie = create(:movie)
       sheet = create(:sheet)
       schedule = create(:schedule, movie_id: movie.id)
-      post :create, params: { reservation: { name: "TEST_NAME", email: "test@test.com", date: "2019-04-16", sheet_id: sheet.id , schedule_id: schedule.id, movie_id: movie.id }}, session: {}
+      post :create, params: { reservation: { name: "TEST_NAME", email: "test@test.com", date: "2019-04-16", sheet_id: sheet.id, schedule_id: schedule.id } }, session: {}
 
       expect(response).to have_http_status(302)
     end
@@ -53,8 +53,7 @@ RSpec.describe Admin::ReservationsController, type: :controller do
       schedule = create(:schedule, movie_id: movie.id)
       # 同じ日付の同じ映画の座席を予約してみる
       create(:reservation, { sheet_id: sheet.id, schedule_id: schedule.id, date: "2019-04-16" })
-      post :create, params: { reservation: { name: "TEST_NAME", email: "test@test.com", date: "2019-04-16", sheet_id: sheet.id , schedule_id: schedule.id, movie_id: movie.id }}, session: {}
-
+      post :create, params: { reservation: { name: "TEST_NAME", email: "test@test.com", date: "2019-04-16", sheet_id: sheet.id, schedule_id: schedule.id } }, session: {}
       expect(response).to have_http_status(400)
     end
   end
@@ -91,7 +90,7 @@ RSpec.describe Admin::ReservationsController, type: :controller do
       schedule = create(:schedule, movie_id: movie.id)
       reservation = create(:reservation, { sheet_id: sheet.id, schedule_id: schedule.id, date: "2019-04-16" }) # NOTE: FactoryBotの影響でdateが自動生成しないため、ここでdateを指定する
 
-      put :update, params: { id: reservation.id, reservation: { name: "TEST_NAME_updated", email: "test_email_updated@test.com", schedule_id: schedule.id, sheet_id: sheet.id }}, session: {}
+      put :update, params: { id: reservation.id, reservation: { name: "TEST_NAME_updated", email: "test_email_updated@test.com", schedule_id: schedule.id, sheet_id: sheet.id } }, session: {}
       expect(response).to have_http_status(302)
     end
   end
