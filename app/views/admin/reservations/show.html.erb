@@ -1,0 +1,11 @@
+<%= form_with(model: @reservation, url: admin_reservation_path(@reservation), method: :put) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <%= f.label :schedule_id %>
+  <%= f.text_field :schedule_id %>
+  <%= f.label :sheet_id %>
+  <%= f.text_field :sheet_id %>
+  <%= f.submit "送信" %>
+<% end %>

@@ -19,7 +19,8 @@ Rails.application.routes.draw do
       resources :schedules, only: [:edit, :destroy, :update]
 
     end
-    resources :reservations # namespaceでネストされてるからadmin::reservations_controllerだよ
+    resources :reservations
+    # namespaceでネストされてるからadmin::reservations_controllerだよ
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
