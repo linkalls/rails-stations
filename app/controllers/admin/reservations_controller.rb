@@ -1,8 +1,9 @@
 class Admin::ReservationsController < ApplicationController
+  before_action :authenticate_user!
   def index
     @reservations = Reservation.joins(schedule: :movie)
                                .where(movies: { is_showing: true }) # is_showingがtrue(1)らしい
-                               .includes(schedule: :movie)
+                               .includes(:user, schedule: :movie)
   end
 
   def new
@@ -10,13 +11,32 @@ class Admin::ReservationsController < ApplicationController
   end
 
   def create
-    @reservation = Reservation.new(post_params)
+    # @schedule = Schedule.find(params[:reservation][:schedule_id])
+    # @reservation = Reservation.new(post_params)
+    # @reservation.schedule = @schedule
+    # @reservation.user = current_user
+    # # dataパラメーターをdateに変換
+    # if @reservation.save
+    #   flash[:success] = '予約に成功しました'
+    #   redirect_to admin_reservations_path
+    # else
+    #   flash[:danger] = '予約に失敗しました'
+    #   render 'new', status: 400
+    # end
+    @schedule = Schedule.find(params[:reservation][:schedule_id])
+    @reservation = @schedule.reservations.new(
+      date: params[:reservation][:data] || params[:reservation][:date], # dataパラメーターの対応
+      sheet_id: params[:reservation][:sheet_id],
+      schedule_id: params[:reservation][:schedule_id],
+      user: current_user
+    )
     if @reservation.save
-      flash[:success] = "予約に成功しました"
-      redirect_to admin_reservations_path
+      flash[:success] = '予約が完了しました'
+      redirect_to movies_path(@movie)
     else
-      flash[:danger] = "予約に失敗しました"
-      render "new", status: 400
+      flash[:danger] = 'その座席はすでに予約済みです'
+      redirect_to reservation_movie_path(params[:reservation][:movie_id], schedule_id: @schedule.id,
+                                         date: params[:reservation][:date])
     end
   end
 
@@ -27,11 +47,11 @@ class Admin::ReservationsController < ApplicationController
   def update
     @reservation = Reservation.find(params[:id])
     if @reservation.update(post_params)
-      flash[:success] = "予約を更新しました"
+      flash[:success] = '予約を更新しました'
       redirect_to admin_reservations_path
     else
-      flash[:danger] = "予約を更新できません"
-      render "edit", status: 400
+      flash[:danger] = '予約を更新できません'
+      render 'edit', status: 400
     end
   end
 
@@ -42,17 +62,17 @@ class Admin::ReservationsController < ApplicationController
   def destroy
     @reservation = Reservation.find(params[:id])
     if @reservation.destroy
-      flash[:success] = "予約を削除しました"
+      flash[:success] = '予約を削除しました'
       redirect_to admin_reservations_path
     else
-      flash[:danger] = "予約を削除できません"
-      render "edit", status: 400
+      flash[:danger] = '予約を削除できません'
+      render 'edit', status: 400
     end
   end
 
   private
 
   def post_params
-    params.require(:reservation).permit(:name, :email, :date, :sheet_id, :schedule_id)
+    params.require(:reservation).permit(:date, :sheet_id, :schedule_id)
   end
 end

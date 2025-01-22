@@ -1,4 +1,4 @@
-<%= form_with(model: @reservation, url: admin_reservations_path, method: :post) do |f| %>
+<%= form_with(model: @reservation, url: reservation_path, method: :post) do |f| %>
 <%= f.hidden_field :data, value: Date.today.to_s %>
 <%= f.label :name %>
 <%= f.text_field :name %>

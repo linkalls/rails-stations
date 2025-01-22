@@ -1,0 +1,8 @@
+AllCops:
+  DisabledByDefault: true
+  NewCops: enable
+  DefaultFormatter: progress
+
+Layout:
+  Enabled: true
+

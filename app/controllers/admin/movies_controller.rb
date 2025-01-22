@@ -9,11 +9,11 @@ class Admin::MoviesController < ApplicationController
 
   def create
     @movie = Movie.new(movie_params)
-      if @movie.save
-        redirect_to admin_movies_path, notice: 'Movie was successfully created.'
-      else
-        # flash[:danger] = "うまく登録できませんでした"
-        render "new",status: :unprocessable_entity
+    if @movie.save
+      redirect_to admin_movies_path, notice: 'Movie was successfully created.'
+    else
+      # flash[:danger] = "うまく登録できませんでした"
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -24,10 +24,10 @@ class Admin::MoviesController < ApplicationController
   def destroy
     @movie = Movie.find(params[:id])
     if @movie.delete
-      flash[:success] = "削除しました"
+      flash[:success] = '削除しました'
       redirect_to admin_movies_path
     else
-      render "edit",status: :unprocessable_entity
+      render 'edit', status: :unprocessable_entity
     end
   end
 
@@ -35,16 +35,16 @@ class Admin::MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
     @movie.update(movie_params)
     if @movie.save
-      flash[:success] = "更新に成功しました"
+      flash[:success] = '更新に成功しました'
       redirect_to admin_movies_path
     else
-      render "edit", status: :unprocessable_entity
+      render 'edit', status: :unprocessable_entity
     end
   end
 
   private
-  def movie_params
-    params.require(:movie).permit(:name, :year, :is_showing,:description,:image_url)
-  end
 
+  def movie_params
+    params.require(:movie).permit(:name, :year, :is_showing, :description, :image_url)
+  end
 end
